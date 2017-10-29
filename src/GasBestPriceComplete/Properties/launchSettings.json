@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "GasBestPrice": {
+      "commandName": "Project",
+      "commandLineArgs": "--pause"
+    }
+  }
+}

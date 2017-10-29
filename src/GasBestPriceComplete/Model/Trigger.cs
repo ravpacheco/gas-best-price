@@ -16,13 +16,12 @@ namespace GasBestPrice.Model
         public Trigger()
             : base(MediaType)
         {
-            Payload = new JsonDocument();
         }
 
         [DataMember]
         public string StateId { get; set; }
 
         [DataMember]
-        public JsonDocument Payload { get; set; }
+        public string Payload { get; set; }
     }
 }

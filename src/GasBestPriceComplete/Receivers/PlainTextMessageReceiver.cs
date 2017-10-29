@@ -29,10 +29,9 @@ namespace GasBestPrice
         {
             var currentState = await _stateManager.GetStateAsync(message.From.ToIdentity(), cancellationToken);
 
-            if (currentState == null)
-            {
+            //Receiving prices
 
-            }
+            
 
             Trace.TraceInformation($"From: {message.From} \tContent: {message.Content}");
             await _sender.SendMessageAsync("Pong!", message.From, cancellationToken);

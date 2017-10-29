@@ -6,13 +6,37 @@
     {
       "type": "PlainTextMessageReceiver",
       "mediaType": "text/plain",
-      "state": null
+      "priority": 1
+    },
+    {
+      "type": "FirstTextMessageReceiver",
+      "mediaType": "text/plain",
+      "state": "default",
+      "priority": 0
+    },
+    {
+      "type": "FixPriceMessageReceiver",
+      "mediaType": "text/plain",
+      "state": "^((3.1.1)|(3.1.1A))*$"
+    },
+    {
+      "type": "TriggerMessageReceiver",
+      "mediaType": "application/vnd.my.trigger"
+    },
+    {
+      "type": "MediaLinkMessageReceiver",
+      "mediaType": "application/vnd.lime.media-link"
+    },
+    {
+      "type": "LocationMessageReceiver",
+      "mediaType": "application/vnd.lime.location"
     }
   ],
   "settings": {
     "key1": "value1",
     "key2": 2
   },
+  //"serviceProviderType": "ServiceProvider",
   "settingsType": "Settings",
   "startupType": "Startup"
 }

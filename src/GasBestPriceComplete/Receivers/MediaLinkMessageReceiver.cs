@@ -46,6 +46,9 @@ namespace GasBestPrice
                     break;
             }
 
+            await _sender.SendMessageAsync(result, message.From, cancellationToken);
+            await Task.Delay(6000);
+
             var quickReply = new Select
             {
                 Text = "Escolha abaixo:",
@@ -65,8 +68,6 @@ namespace GasBestPrice
                         }
             };
 
-            await _sender.SendMessageAsync(result, message.From, cancellationToken);
-            await Task.Delay(6000);
             await _sender.SendMessageAsync(quickReply, message.From, cancellationToken);
         }
     }
