@@ -35,6 +35,10 @@ namespace GasBestPrice
             //Update user state
             await _stateManager.SetStateAsync(message.From.ToIdentity(), trigger.StateId, cancellationToken);
 
+            var myContextKey = $"{message.From.ToIdentity()}:context";
+
+            var contextDocument = await _bucketExtension.GetAsync<JsonDocument>(myContextKey);
+
             switch (trigger.StateId)
             {
                 //Tips
@@ -189,22 +193,25 @@ namespace GasBestPrice
                     var carousel = await _gasStationService.GetFavoritesGasStationsAsync(message.From.ToIdentity());
 
                     //Carousel with favorites gas stations
-                    var readyTextDocument = new PlainText { Text = "Pronto!Os postos favoritos são: ⬅️➡️" };
-                    await _sender.SendMessageAsync(readyTextDocument, message.From, cancellationToken);
+                    if (carousel != null)
+                    {
+                        var readyTextDocument = new PlainText { Text = "Pronto!Os postos favoritos são: ⬅️➡️" };
+                        await _sender.SendMessageAsync(readyTextDocument, message.From, cancellationToken);
 
-                    await _sender.SendMessageAsync(carousel, message.From, cancellationToken);
+                        await _sender.SendMessageAsync(carousel, message.From, cancellationToken);
+                    }
+                    else
+                    {
+                        await _sender.SendMessageAsync(new PlainText { Text = "Ops, você ainda não tem nenhum posto favorito" }, message.From, cancellationToken);
+                    }
 
                     break;
 
                 //Update GasStation prices
                 case "3.1.1":
 
-                    var currentState = await _stateManager.GetStateAsync(message.From, cancellationToken);
-
-                    var myContextKey = $"{message.From.ToIdentity()}:context";
-
-                    var contextDocument = await _bucketExtension.GetAsync<JsonDocument>(myContextKey);
                     contextDocument["lastSelectedGasStationId"] = trigger.Payload;
+
                     await _bucketExtension.SetAsync(myContextKey, contextDocument);
 
                     var helpText = new PlainText { Text = "Ops!Ainda bem que você está aqui para me ajudar 😅" };

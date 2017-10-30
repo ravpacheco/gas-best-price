@@ -38,7 +38,6 @@ namespace GasBestPrice
         public async Task ReceiveAsync(Message message, CancellationToken cancellationToken)
         {
             var currentState = await _stateManager.GetStateAsync(message.From.ToIdentity(), cancellationToken);
-
             var receivedText = (message.Content as PlainText).Text;
 
             var result = await _artificialIntelligenceExtension.AnalyzeAsync(new AnalysisRequest { Text = receivedText });
