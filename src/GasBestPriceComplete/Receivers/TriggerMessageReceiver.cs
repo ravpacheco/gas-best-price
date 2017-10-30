@@ -39,8 +39,21 @@ namespace GasBestPrice
             {
                 //Tips
                 case "2.0.0":
-                    var textDocument = new PlainText { Text = "Mandou bem, Paula! 😄" };
-                    await _sender.SendMessageAsync(textDocument, message.From, cancellationToken);
+                    var textDocument = new PlainText { Text = "Mandou bem, ${contact.name}! 😄" };
+
+                    var textMessage = new Message
+                    {
+                        To = message.From,
+                        Content = textDocument,
+                        Id = EnvelopeId.NewId(),
+                        Metadata = new Dictionary<string, string>
+                        {
+                            { "#message.replaceVariables", "true" }
+                        }
+                    };
+
+                    await _sender.SendMessageAsync(textMessage, cancellationToken);
+
                     await Task.Delay(2000);
 
                     textDocument = new PlainText { Text = "Deslize ⬅️➡️ para saber mais:" };
@@ -121,7 +134,7 @@ namespace GasBestPrice
                     await _sender.SendMessageAsync(quickReply, message.From, cancellationToken);
 
                     break;
-                
+
                 //Options
                 case "3.0.0":
 
@@ -231,7 +244,7 @@ namespace GasBestPrice
                     };
 
                     await _sender.SendMessageAsync(actionsQuickReply, message.From, cancellationToken);
-                    
+
                     break;
 
                 //Get the route

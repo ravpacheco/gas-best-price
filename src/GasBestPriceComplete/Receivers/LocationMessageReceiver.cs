@@ -25,8 +25,20 @@ namespace GasBestPrice.Receivers
         {
             var receivedLocation = message.Content as Location;
 
-            var textDocument = new PlainText { Text = "Um instante... ⏳ Estou procurando os postos, Paula." };
-            await _sender.SendMessageAsync(textDocument, message.From, cancellationToken);
+            var textDocument = new PlainText { Text = "Um instante... ⏳ Estou procurando os postos, ${contact.name}." };
+
+            var textMessage = new Message
+            {
+                To = message.From,
+                Content = textDocument,
+                Id = EnvelopeId.NewId(),
+                Metadata = new Dictionary<string, string>
+                {
+                    { "#message.replaceVariables", "true" }
+                }
+            };
+
+            await _sender.SendMessageAsync(textMessage, cancellationToken);
 
             //Get GasStations
             var carousel = await _gasStationService.GetNearGasStationsAsync(receivedLocation);

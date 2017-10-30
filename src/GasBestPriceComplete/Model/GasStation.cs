@@ -11,7 +11,7 @@ namespace GasBestPrice.Model
         public DateTimeOffset LastUpdated { get; set; }    
         public float GasolinePrice { get; set; }
         public float AlcoholPrice { get; set; }
-        public long Latitude { get; set; }
-        public long Longitude { get; set; }
+        public float Latitude { get; set; }
+        public float Longitude { get; set; }
     }
 }

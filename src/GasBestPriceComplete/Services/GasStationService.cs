@@ -31,7 +31,10 @@ namespace GasBestPrice.Services
                     Address = "Rua Mais bonita da cidade",
                     AlcoholPrice = 2.89f,
                     GasolinePrice = 3.81f,
-                    LastUpdated = DateTimeOffset.Now
+                    LastUpdated = DateTimeOffset.Now,
+                    Latitude = -19.9292403f,
+                    Longitude = -43.9543158f
+
                 },
                 new GasStation
                 {
@@ -39,7 +42,9 @@ namespace GasBestPrice.Services
                     Address = "Rua Mais bonita da cidade",
                     AlcoholPrice = 2.89f,
                     GasolinePrice = 3.81f,
-                    LastUpdated = DateTimeOffset.Now
+                    LastUpdated = DateTimeOffset.Now,
+                    Latitude = -19.9292403f,
+                    Longitude = -43.9543158f
                 },
             };
 
@@ -48,9 +53,9 @@ namespace GasBestPrice.Services
 
         public async Task<DocumentCollection> GetFavoritesGasStationsAsync(Identity userIdentity)
         {
-            var myFavoriteKey = $"{userIdentity}:myfavorites";
+            var myContextKey = $"{userIdentity}:context";
 
-            var favoritesGasStationsIds = await _bucketExtension.GetAsync<JsonDocument>(myFavoriteKey);
+            var favoritesGasStationsIds = await _bucketExtension.GetAsync<JsonDocument>(myContextKey);
 
             //foreach (var item in collection)
 
@@ -62,7 +67,9 @@ namespace GasBestPrice.Services
                     Address = "Rua Mais bonita da cidade",
                     AlcoholPrice = 2.89f,
                     GasolinePrice = 3.81f,
-                    LastUpdated = DateTimeOffset.Now
+                    LastUpdated = DateTimeOffset.Now,
+                    Latitude = -19.9292403f,
+                    Longitude = -43.9543158f
                 }
             };
 
@@ -80,7 +87,9 @@ namespace GasBestPrice.Services
                 Address = "Rua Mais bonita da cidade",
                 AlcoholPrice = 2.89f,
                 GasolinePrice = 3.81f,
-                LastUpdated = DateTimeOffset.Now
+                LastUpdated = DateTimeOffset.Now,
+                Latitude = -19.9292403f,
+                Longitude = -43.9543158f
             };
         }
 

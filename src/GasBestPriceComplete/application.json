@@ -6,7 +6,7 @@
     {
       "type": "PlainTextMessageReceiver",
       "mediaType": "text/plain",
-      "priority": 1
+      "priority": 101
     },
     {
       "type": "FirstTextMessageReceiver",
@@ -17,7 +17,14 @@
     {
       "type": "FixPriceMessageReceiver",
       "mediaType": "text/plain",
-      "state": "^((3.1.1)|(3.1.1A))*$"
+      "state": "3.1.1",
+      "priority": 0
+    },
+    {
+      "type": "FixPriceMessageReceiver",
+      "mediaType": "text/plain",
+      "state": "3.1.1A",
+      "priority": 0
     },
     {
       "type": "TriggerMessageReceiver",

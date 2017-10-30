@@ -42,12 +42,13 @@ namespace GasBestPrice
                     break;
                 case "document":
                 case "application":
+                case "text":
                     result = new PlainText { Text = "Oi, não curto documentos, por enquanto eu entendo apenas texto 😉" };
                     break;
             }
 
             await _sender.SendMessageAsync(result, message.From, cancellationToken);
-            await Task.Delay(6000);
+            await Task.Delay(2000);
 
             var quickReply = new Select
             {
